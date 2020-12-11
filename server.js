@@ -24,7 +24,7 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.get("/api/timestamp", (req, res) => {
+app.get("/api/timestamp/", (req, res) => {
   res.json({unix: Date.now(), utc: Date()});
 });
 
@@ -33,7 +33,7 @@ app.get("/api/timestamp/:date_string", (req,res) => {
 
   //regex checks if unix time
   if (/\d{5,}/.test(dateString)) {
-    let dateInt = dateString;
+    let dateInt = parseInt(dateString);
     res.json({ unix: dateString, utc: new Date(dateInt).toUTCString() });
   } else {
     let dateObject = new Date(dateString);
