@@ -33,7 +33,7 @@ app.get("/api/timestamp/:date_string", (req,res) => {
 
   //regex checks if unix time
   if (/\d{5,}/.test(dateString)) {
-    let dateInt = parseInt(dateString);
+    let dateInt = dateString;
     res.json({ unix: dateString, utc: new Date(dateInt).toUTCString() });
   } else {
     let dateObject = new Date(dateString);
