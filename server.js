@@ -19,30 +19,22 @@ app.get("/", function (req, res) {
 });
 
 
-// your first API endpoint... 
-app.get("/api/hello", function (req, res) {
-  res.json({greeting: 'hello API'});
-});
-
 app.get("/api/timestamp/", (req, res) => {
-  res.json({unix: Date.now(), utc: Date()});
+  res.json({ unix: Date.now(), utc: Date() });
 });
 
-app.get("/api/timestamp/:date_string", (req,res) => {
+app.get("/api/timestamp/:date_string", (req, res) => {
   let dateString = req.params.date_string;
 
-  //regex checks if unix time
   if (/\d{5,}/.test(dateString)) {
-    let dateInt = parseInt(dateString);
+    dateInt = parseInt(dateString);
     res.json({ unix: dateString, utc: new Date(dateInt).toUTCString() });
-  } else {
-    let dateObject = new Date(dateString);
   }
 
   let dateObject = new Date(dateString);
 
   if (dateObject.toString() === "Invalid Date") {
-    res.json({error: "Invalid Date"});
+    res.json({ error: "Invaid Date" });
   } else {
     res.json({ unix: dateObject.valueOf(), utc: dateObject.toUTCString() });
   }
