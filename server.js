@@ -33,8 +33,10 @@ app.get("/api/timestamp/:date_string", (req,res) => {
 
   //regex checks if unix time
   if (/\d{5,}/.test(dateString)) {
-    dateInt = parseInt(dateString);
+    let dateInt = parseInt(dateString);
     res.json({ unix: dateString, utc: new Date(dateInt).toUTCString() });
+  } else {
+    let dateObject = new Date(dateString);
   }
 
   let dateObject = new Date(dateString);
@@ -42,7 +44,7 @@ app.get("/api/timestamp/:date_string", (req,res) => {
   if (dateObject.toString() === "Invalid Date") {
     res.json({error: "Invalid Date"});
   } else {
-    res.json({unix: dateObject.valueOf(), utc: dateObject.toUTCString() });
+    res.json({ unix: dateObject.valueOf(), utc: dateObject.toUTCString() });
   }
 });
 
